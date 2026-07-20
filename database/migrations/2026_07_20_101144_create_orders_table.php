@@ -13,16 +13,19 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('client_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
             $table->foreignId('kitchen_worker_id')
                 ->nullable()
-                ->constrained('employees')
+                ->constrained('users')
                 ->nullOnDelete();
             $table->foreignId('delivery_worker_id')
                 ->nullable()
-                ->constrained('employees')
+                ->constrained('users')
                 ->nullOnDelete();
-            $table->foreignId('address_id')->constrained()->cascadeOnDelete();
+            
+            $table->longText('address');
             $table->enum('status', [
                 'pending',
                 'preparing',
@@ -32,6 +35,7 @@ return new class extends Migration
                 'cancelled'
             ]);
             $table->decimal('total_price', 8, 2);
+            $table->timestamp('order_date');
             $table->softDeletes();
             $table->timestamps();
         });

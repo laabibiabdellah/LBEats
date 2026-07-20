@@ -13,7 +13,7 @@ class Order extends Model
         'client_id',
         'kitchen_worker_id',
         'delivery_worker_id',
-        'address_id',
+        'address',
         'status',
         'total_price',
         'order_date'
@@ -21,23 +21,17 @@ class Order extends Model
 
     public function client()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class, 'client_id');
     }
 
     public function kitchenWorker()
     {
-        return $this->belongsTo(Employee::class, 'kitchen_worker_id');
+        return $this->belongsTo(User::class, 'kitchen_worker_id');
     }
 
     public function deliveryWorker()
     {
-        return $this->belongsTo(Employee::class, 'delivery_worker_id');
-    }
-
-
-    public function address()
-    {
-        return $this->belongsTo(Address::class);
+        return $this->belongsTo(User::class, 'delivery_worker_id');
     }
 
     public function items()
