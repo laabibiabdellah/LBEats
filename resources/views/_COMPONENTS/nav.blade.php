@@ -66,6 +66,22 @@
                 </div>
             </div>
 
+            @auth
+                <a href="{{ route('logout') }}" class="nav-link ms-lg-3">
+                    Logout
+                </a>
+            @endauth
+
+            @guest
+                <a href="{{ route('login') }}" class="nav-link ms-lg-3 {{ request()->routeIs('login') ? 'active' : '' }}">
+                Login
+            </a>
+
+            <a href="{{ route('register') }}"
+               class="btn btn-primary rounded-pill px-4 py-2 ms-lg-3 mt-2 mt-lg-0 {{ request()->routeIs('register') ? 'active' : '' }}">
+                Register
+            </a>
+            @endguest
 
             <a href="{{ route('cart') }}" class="nav-link ms-lg-3">
                 <i class="fas fa-shopping-cart fa-lg"></i>

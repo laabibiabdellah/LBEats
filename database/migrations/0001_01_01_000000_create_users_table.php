@@ -22,9 +22,10 @@ return new class extends Migration
                 'client',
                 'kitchen_worker',
                 'delivery_worker'
-            ]);
+            ])->default('client');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -24,7 +24,6 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete();
-            
             $table->longText('address');
             $table->enum('status', [
                 'pending',
